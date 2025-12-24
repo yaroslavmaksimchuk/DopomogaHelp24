@@ -1007,28 +1007,45 @@
         }
 
         /* Кінець стилів — загальна кількість рядків у CSS ~500 */
+            /* ======================================== */
+    /* ЕМБЛЕМА ЗСУ ЗЛІВА В ШАПЦІ (ЯК У СПРАВЖНЬОМУ) */
+    /* ======================================== */
+    .header-emblem {
+        height: 60px;
+        width: auto;
+        margin-right: 1rem;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    @media (max-width: 768px) {
+        .header-emblem {
+            height: 50px;
+        }
+    }
+
+    /* Трохи підкорегуємо вирівнювання в шапці */
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
     </style>
 </head>
 <body>
     <!-- Шапка -->
     <header>
-        <div class="container-fluid">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
+                    <div class="header-left">
                     <button class="toggle-sidebar-btn d-lg-none" id="toggleSidebarMobile">
                         <i class="bi bi-list"></i>
                     </button>
-                    <span class="official-logo">ТЦК</span>
-                    <h1>Інформаційна система ТЦК та СП</h1>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Emblem_of_the_Ukrainian_Armed_Forces.svg/800px-Emblem_of_the_Ukrainian_Armed_Forces.svg.png" 
+                         alt="Емблема Збройних Сил України" class="header-emblem">
+                    <div>
+                        <span class="official-logo">ТЦК</span>
+                        <h1>Інформаційна система ТЦК та СП</h1>
+                    </div>
                     <span class="demo-badge">ДЕМО-ВЕРСІЯ / MOCK DATA</span>
                 </div>
-                <div id="currentUserInfo" class="text-end">
-                    <small>Увійшов як: <span id="currentUserName">—</span> (роль: <span id="currentUserRole">—</span>)</small>
-                    <button class="btn btn-outline-light btn-sm ms-3" id="logoutBtn">Вихід з системи</button>
-                </div>
-            </div>
-        </div>
-    </header>
+</header>
 
     <!-- Бічна панель навігації -->
     <nav id="sidebar">
