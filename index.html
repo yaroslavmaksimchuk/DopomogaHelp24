@@ -1033,18 +1033,26 @@
 <body>
     <!-- Шапка -->
     <header>
-                    <div class="header-left">
-                    <button class="toggle-sidebar-btn d-lg-none" id="toggleSidebarMobile">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Emblem_of_the_Ukrainian_Armed_Forces.svg/800px-Emblem_of_the_Ukrainian_Armed_Forces.svg.png" 
-                         alt="Емблема Збройних Сил України" class="header-emblem">
-                    <div>
-                        <span class="official-logo">ТЦК</span>
-                        <h1>Інформаційна система ТЦК та СП</h1>
-                    </div>
-                    <span class="demo-badge">ДЕМО-ВЕРСІЯ / MOCK DATA</span>
-                </div>
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <button class="toggle-sidebar-btn d-lg-none" id="toggleSidebarMobile">
+                    <i class="bi bi-list"></i>
+                </button>
+                <!-- Замінено текст ТЦК на емблему МВС -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/%D0%93%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%B4%D0%B8%D1%87%D0%BD%D0%B8%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA_-_%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_%D0%9C%D0%92%D0%A1_%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B8.svg/1200px-%D0%93%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%B4%D0%B8%D1%87%D0%BD%D0%B8%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA_-_%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_%D0%9C%D0%92%D0%A1_%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B8.svg.png" 
+                     alt="Емблема МВС України" 
+                     class="me-3" 
+                     style="height: 60px; width: auto;">
+                <h1>Інформаційна система ТЦК та СП</h1>
+                <span class="demo-badge">ДЕМО-ВЕРСІЯ / MOCK DATA</span>
+            </div>
+            <div id="currentUserInfo" class="text-end">
+                <small>Увійшов як: <span id="currentUserName">—</span> (роль: <span id="currentUserRole">—</span>)</small>
+                <button class="btn btn-outline-light btn-sm ms-3" id="logoutBtn">Вихід з системи</button>
+            </div>
+        </div>
+    </div>
 </header>
 
     <!-- Бічна панель навігації -->
@@ -1958,3 +1966,4 @@
     </script>
 </body>
 </html>
+
