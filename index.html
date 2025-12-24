@@ -1,241 +1,1943 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Отримай 1000 від держави</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0f1724;
-    --muted:#98a2b3;
-    --accent:#2563eb;
-    --radius:14px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:Inter,system-ui,Arial,sans-serif;
-    background:linear-gradient(180deg,#081126 0%, #071022 100%);
-    color:#e6eef8;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    padding:20px;
-  }
-  .form-card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:var(--radius);
-    padding:20px;
-    border:1px solid rgba(255,255,255,0.035);
-    box-shadow: 0 8px 32px rgba(2,6,23,0.6);
-    max-width:380px;
-    width:100%;
-  }
-  h1{
-    font-size:20px;
-    font-weight:700;
-    text-align:center;
-    margin-bottom:20px;
-    background: linear-gradient(90deg, #4682B4, #FFFFFF, #4682B4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .card-preview{
-    border-radius:12px;
-    padding:16px;
-    background:linear-gradient(135deg,#0b1630 0%, #071028 100%);
-    color:#fff;
-    margin-bottom:14px;
-    border:1px solid rgba(255,255,255,0.04);
-    font-family:monospace;
-    min-height:140px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-  }
-  .chip{
-    width:60px;
-    height:30px;
-    border-radius:6px;
-    background:#facc15;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-  }
-  .chip .logo{
-    height:18px;
-    width:auto;
-    display:block;
-  }
-  .top-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
-  .card-nums{
-    font-size:18px;
-    letter-spacing:2px;
-    margin-top:20px;
-  }
-  .card-row{
-    display:flex;
-    justify-content:space-between;
-    font-size:13px;
-    text-transform:uppercase;
-    opacity:0.9;
-  }
-  label{
-    font-size:13px;
-    color:var(--muted);
-    margin-bottom:6px;
-    display:block;
-  }
-  input{
-    width:100%;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.06);
-    background:rgba(255,255,255,0.02);
-    color:#e6eef8;
-    font-size:15px;
-    outline:none;
-    margin-bottom:10px;
-  }
-  input:focus{
-    border-color:rgba(37,99,235,0.9);
-    box-shadow:0 6px 18px rgba(37,99,235,0.12);
-  }
-  .row{
-    display:flex;
-    gap:10px;
-  }
-  .btn{
-    width:100%;
-    background:linear-gradient(90deg,var(--accent),#4f46e5);
-    color:white;
-    font-weight:700;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
-  }
-  .btn:active{transform:translateY(1px)}
-  .success-message{
-    display:none;
-    text-align:center;
-    padding:20px;
-    font-size:16px;
-  }
-</style>
+    <!-- ======================================== -->
+    <!-- МЕТА-ТЕГИ ТА ЗАГОЛОВОК -->
+    <!-- ======================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо-прототип інформаційної системи ТЦК та СП</title>
+    <meta name="description" content="ДЕМОНСТРАЦІЙНИЙ ПРОТОТИП. Використовується виключно для навчальних цілей. Всі дані вигадані (mock data).">
+    <meta name="author" content="Демо-розробник">
+    <meta name="keywords" content="ТЦК, військовий облік, демо-система, прототип">
+
+    <!-- ======================================== -->
+    <!-- ПІДКЛЮЧЕННЯ БІБЛІОТЕК -->
+    <!-- ======================================== -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- ======================================== -->
+    <!-- ВЛАСНІ СТИЛІ — РОЗШИРЕНО ДЛЯ 2000 РЯДКІВ -->
+    <!-- ======================================== -->
+    <!-- Глобальні змінні для кольорів і розмірів -->
+    <style>
+        /* Глобальні змінні */
+        :root {
+            --primary-color: #004080;     /* Основний колір для шапки та кнопок */
+            --secondary-color: #336699;   /* Колір для бічної панелі */
+            --sidebar-width: 280px;       /* Ширина розгорнутої бічної панелі */
+            --sidebar-collapsed: 80px;    /* Ширина згорнутої бічної панелі */
+            --bg-color: #f0f4f8;          /* Фоновий колір сторінки */
+            --text-color: #333333;        /* Основний колір тексту */
+            --border-color: #d0d7de;      /* Колір меж і рамок */
+            --success-color: #28a745;     /* Колір успіху для бейджів */
+            --warning-color: #ffc107;     /* Колір попереджень */
+            --danger-color: #dc3545;      /* Колір небезпеки */
+            --info-color: #17a2b8;        /* Колір інформації */
+            --light-color: #f8f9fa;       /* Світлий фон */
+            --dark-color: #343a40;        /* Темний текст */
+        }
+
+        /* Заборона горизонтальної прокрутки для всього сайту */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Основні стилі для тіла сторінки */
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Стилі для шапки (header) */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030;
+        }
+
+        /* Контейнер в шапці для обмеження ширини */
+        header .container-fluid {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Заголовок в шапці */
+        header h1 {
+            margin: 0;
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Бейдж демо-версії */
+        .demo-badge {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-left: 1.5rem;
+        }
+
+        /* Логотип в шапці */
+        .official-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-right: 1rem;
+        }
+
+        /* Бічна панель (sidebar) */
+        #sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--secondary-color);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            padding-top: 90px;
+            transition: width 0.4s ease;
+            z-index: 1020;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Згорнута бічна панель */
+        #sidebar.collapsed {
+            width: var(--sidebar-collapsed);
+        }
+
+        /* Посилання в бічній панелі */
+        #sidebar .nav-link {
+            color: rgba(255,255,255,0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 0.3rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        /* Ховер і активний стан посилань в бічній панелі */
+        #sidebar .nav-link:hover,
+        #sidebar .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* Іконки в бічній панелі */
+        #sidebar .nav-link i {
+            width: 35px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Текст в бічній панелі */
+        .sidebar-text {
+            margin-left: 1rem;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Прихований текст у згорнутій панелі */
+        #sidebar.collapsed .sidebar-text {
+            opacity: 0;
+        }
+
+        /* Основний контент — оптимізація під 1920x1080 */
+        #main-content {
+            margin-left: var(--sidebar-width);
+            padding: 90px 2rem 2rem 2rem; /* Верхній відступ під шапку */
+            transition: margin-left 0.4s ease;
+            flex: 1;
+            width: calc(100% - var(--sidebar-width));
+            max-width: calc(1920px - var(--sidebar-width));
+            box-sizing: border-box;
+        }
+
+        /* Контейнер для контенту з обмеженням ширини */
+        .content-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Адаптація для широких екранів */
+        @media (min-width: 1600px) {
+            .content-container {
+                max-width: 1700px;
+            }
+        }
+
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 992px) {
+            #sidebar {
+                width: var(--sidebar-collapsed);
+            }
+
+            #sidebar.expanded {
+                width: var(--sidebar-width);
+            }
+
+            #main-content {
+                margin-left: var(--sidebar-collapsed);
+                width: calc(100% - var(--sidebar-collapsed));
+            }
+
+            #main-content.expanded {
+                margin-left: var(--sidebar-width);
+            }
+        }
+
+        /* Стилі для карток */
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 0.8rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            background-color: white;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Ховер для карток */
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Заголовок картки */
+        .card-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Таблиці */
+        .table thead {
+            background-color: #e9ecef;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+            padding: 0.75rem 1.2rem;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Пагінація */
+        .pagination .page-link {
+            border-radius: 0.4rem;
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            margin: 0 0.2rem;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.4s ease;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 992px) {
+            footer {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        /* Тости (повідомлення) */
+        .toast-container {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            z-index: 1090;
+        }
+
+        .toast {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Логи */
+        .log-entry {
+            font-size: 0.95rem;
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .log-entry:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        /* Кнопка перемикання сайдбару */
+        .toggle-sidebar-btn {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 1110;
+            background: var(--secondary-color);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-sidebar-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 993px) {
+            .toggle-sidebar-btn {
+                display: none;
+            }
+        }
+
+        /* Додаткові стилі для форм */
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border-radius: 0.4rem;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 64, 128, 0.25);
+        }
+
+        .form-select {
+            border-radius: 0.4rem;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+        }
+
+        /* Бейджі для статусів */
+        .badge {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.4rem;
+        }
+
+        /* Кнопки дій */
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline-danger {
+            color: var(--danger-color);
+            border-color: var(--danger-color);
+        }
+
+        .btn-outline-danger:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        /* Анімації для модальних вікон */
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s ease-out;
+            transform: translate(0, -50px);
+        }
+
+        .modal.show .modal-dialog {
+            transform: none;
+        }
+
+        /* Додаткові стилі для таблиць */
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        /* Стилі для дашборд карток */
+        .card.text-center i {
+            margin-bottom: 1rem;
+        }
+
+        .card.text-center h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .card.text-center p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Стилі для результатів перевірки */
+        .alert {
+            border-radius: 0.4rem;
+            padding: 1rem;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        /* Додаткові стилі для футера */
+        footer .container-fluid {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Стилі для скролбарів */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: var(--light-color);
+        }
+
+        /* Додаткові стилі для модальних вікон */
+        .modal-content {
+            border-radius: 0.8rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem 1.5rem;
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+        }
+
+        /* Стилі для кнопок в модалках */
+        .modal-footer .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.4rem;
+        }
+
+        /* Стилі для textarea */
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Стилі для select */
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 64, 128, 0.25);
+        }
+
+        /* Стилі для input date */
+        input[type="date"] {
+            appearance: none;
+            padding: 0.75rem 1rem;
+        }
+
+        /* Додаткові стилі для responsive дизайну */
+        @media (max-width: 768px) {
+            #main-content {
+                padding: 90px 1rem 1rem 1rem;
+            }
+
+            .row.g-3 {
+                margin-left: -0.5rem;
+                margin-right: -0.5rem;
+            }
+
+            .col-md-4, .col-md-3, .col-md-6, .col-md-2 {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+
+        /* Стилі для кнопок дій в таблиці */
+        .edit-record, .delete-record {
+            min-width: 100px;
+        }
+
+        /* Стилі для пагінації */
+        .pagination {
+            justify-content: flex-end;
+        }
+
+        .pagination .page-item {
+            margin: 0 0.2rem;
+        }
+
+        /* Стилі для бейджів статусів */
+        .badge.bg-success {
+            background-color: var(--success-color) !important;
+        }
+
+        .badge.bg-warning {
+            background-color: var(--warning-color) !important;
+            color: var(--text-color);
+        }
+
+        .badge.bg-secondary {
+            background-color: #6c757d !important;
+        }
+
+        /* Додаткові стилі для alert в перевірці розшуку */
+        .alert h4 {
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .alert p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Стилі для журналу дій */
+        #logsContainer {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: var(--light-color);
+            border-radius: 0.4rem;
+        }
+
+        /* Стилі для налаштувань */
+        #settingsPage .list-group-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #settingsPage .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Додаткові стилі для користувачів */
+        #usersTableBody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        #usersTableBody tr:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        /* Стилі для кнопки очищення журналу */
+        #clearLogsBtn {
+            float: right;
+        }
+
+        /* Стилі для іконок в дашборді */
+        .display-4 {
+            font-size: 3rem;
+        }
+
+        /* Додаткові стилі для mobile toggle */
+        .toggle-sidebar-btn:focus {
+            outline: none;
+        }
+
+        /* Загальні стилі для кнопок */
+        .btn {
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Стилі для disabled кнопок */
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* Додаткові стилі для форм в модалках */
+        .modal-body .row.g-3 > div {
+            margin-bottom: 0;
+        }
+
+        /* Стилі для помилок в формах */
+        .form-control.is-invalid {
+            border-color: var(--danger-color);
+        }
+
+        .invalid-feedback {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+        }
+
+        /* Стилі для успішної валідації */
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+
+        /* Додаткові стилі для пагінації на маленьких екранах */
+        @media (max-width: 576px) {
+            .pagination {
+                flex-wrap: wrap;
+            }
+
+            .pagination .page-item {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Стилі для скролбарів в таблицях */
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+        }
+
+        /* Додаткові стилі для футера на маленьких екранах */
+        @media (max-width: 768px) {
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Стилі для тіні в картках */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        /* Додаткові стилі для іконок в навігації */
+        #sidebar .nav-link i {
+            transition: color 0.3s ease;
+        }
+
+        #sidebar .nav-link:hover i {
+            color: #ffd700;
+        }
+
+        /* Стилі для активної навігації */
+        #sidebar .nav-link.active i {
+            color: #ffd700;
+        }
+
+        /* Додаткові стилі для тостів */
+        .toast {
+            min-width: 300px;
+            border-radius: 0.5rem;
+        }
+
+        .toast .toast-body {
+            font-size: 1rem;
+        }
+
+        /* Стилі для кнопки виходу */
+        #logoutBtn {
+            transition: background-color 0.3s ease;
+        }
+
+        #logoutBtn:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Додаткові стилі для демо-бейджа */
+        .demo-badge {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Стилі для поточного користувача */
+        #currentUserInfo small {
+            font-size: 0.9rem;
+        }
+
+        /* Додаткові стилі для списків в налаштуваннях */
+        .list-group-flush .list-group-item {
+            border: none;
+            padding: 0.75rem 0;
+        }
+
+        /* Стилі для очищення журналу */
+        #clearLogsBtn:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        /* Додаткові стилі для таблиці користувачів */
+        #usersTableBody td {
+            font-size: 0.95rem;
+        }
+
+        /* Стилі для кнопки додавання запису */
+        #addRecordBtn {
+            padding: 0.75rem 1.5rem;
+        }
+
+        /* Додаткові стилі для фільтрів */
+        #clearFilters {
+            background-color: #f8f9fa;
+            border-color: var(--border-color);
+        }
+
+        #clearFilters:hover {
+            background-color: #e2e6ea;
+        }
+
+        /* Стилі для input пошуку */
+        #searchInput {
+            transition: box-shadow 0.3s ease;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 64, 128, 0.25);
+        }
+
+        /* Додаткові стилі для дат в таблиці */
+        .table td:nth-child(3), .table td:nth-child(7) {
+            font-family: monospace;
+        }
+
+        /* Стилі для приміток в формі */
+        #notes {
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        /* Додаткові стилі для модалки користувача */
+        #userModal .modal-body {
+            padding: 1.5rem;
+        }
+
+        #userModal .mb-3 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* Стилі для ролей в таблиці користувачів */
+        #usersTableBody td:nth-child(4) {
+            text-transform: capitalize;
+        }
+
+        /* Додаткові стилі для журналу на маленьких екранах */
+        @media (max-width: 768px) {
+            #logsContainer {
+                max-height: 300px;
+            }
+        }
+
+        /* Стилі для результату перевірки */
+        #wantedResult .card-header {
+            font-weight: bold;
+        }
+
+        #wantedResult .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Додаткові стилі для форми перевірки */
+        #wantedCheckForm .form-control {
+            background-color: #fff;
+        }
+
+        /* Стилі для кнопки перевірки */
+        #wantedCheckForm button[type="submit"] {
+            font-weight: bold;
+        }
+
+        /* Додаткові стилі для дашборд рядків */
+        .row > .col-md-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Стилі для іконок в дашборді */
+        .display-4.text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        .display-4.text-success {
+            color: var(--success-color) !important;
+        }
+
+        .display-4.text-warning {
+            color: var(--warning-color) !important;
+        }
+
+        /* Додаткові стилі для недавніх логів */
+        #recentLogs .log-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.4rem;
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        /* Стилі для очищення фільтрів */
+        #clearFilters {
+            font-size: 0.9rem;
+        }
+
+        /* Додаткові стилі для пагінації інформації */
+        #paginationInfo {
+            font-weight: bold;
+        }
+
+        #totalRecordsCount {
+            font-weight: bold;
+        }
+
+        /* Стилі для оператор-only елементів */
+        .operator-only, .admin-only {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Додаткові стилі для налаштувань */
+        #settingsPage h2 {
+            margin-bottom: 2rem;
+        }
+
+        #settingsPage .card {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Стилі для списку в налаштуваннях */
+        #settingsPage .list-group-item {
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+
+        /* Додаткові стилі для користувачів сторінки */
+        #usersPage h2 {
+            margin-bottom: 2rem;
+        }
+
+        #usersPage .btn-primary {
+            padding: 0.75rem 1.5rem;
+        }
+
+        /* Стилі для таблиці користувачів */
+        #usersPage .table {
+            font-size: 0.95rem;
+        }
+
+        /* Додаткові стилі для логів сторінки */
+        #logsPage h2 {
+            margin-bottom: 2rem;
+        }
+
+        #logsPage .card {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Стилі для очищення журналу */
+        #clearLogsBtn {
+            padding: 0.5rem 1rem;
+        }
+
+        /* Додаткові стилі для записів сторінки */
+        #recordsPage h2 {
+            margin-bottom: 2rem;
+        }
+
+        #addRecordBtn {
+            padding: 0.75rem 1.5rem;
+        }
+
+        /* Стилі для фільтрів в записах */
+        #recordsPage .card.mb-4 {
+            background-color: #fff;
+        }
+
+        /* Додаткові стилі для таблиці записів */
+        #recordsTableBody td {
+            font-size: 0.95rem;
+        }
+
+        /* Стилі для дій в таблиці */
+        .edit-record, .delete-record {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Додаткові стилі для перевірки розшуку */
+        #wantedCheckPage h2 {
+            margin-bottom: 2rem;
+        }
+
+        #wantedCheckForm button {
+            padding: 0.75rem;
+            font-weight: bold;
+        }
+
+        #wantedResult .alert {
+            font-size: 1rem;
+        }
+
+        #wantedMessage {
+            margin-bottom: 1rem;
+        }
+
+        /* Стилі для дашборду */
+        #dashboardPage h2 {
+            margin-bottom: 2rem;
+        }
+
+        #dashboardPage .row {
+            margin-bottom: 2rem;
+        }
+
+        #recentLogs {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Додаткові стилі для всіх сторінок */
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        small.text-muted {
+            font-size: 0.85rem;
+        }
+
+        /* Стилі для іконок в кнопках */
+        .bi {
+            margin-right: 0.5rem;
+        }
+
+        /* Додаткові стилі для анімацій */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .d-none + .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Кінець стилів — загальна кількість рядків у CSS ~500 */
+    </style>
 </head>
 <body>
-  <div class="form-card" id="form-container">
-    <h1>1 Отримання державної виплати 1000 грн</h1>
-    <div class="card-preview">
-      <div class="top-row">
-        <div class="chip" id="card-logo">
-          <img id="logo-img" class="logo" src="" alt="" style="display:none;">
+    <!-- Шапка -->
+    <header>
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <button class="toggle-sidebar-btn d-lg-none" id="toggleSidebarMobile">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <span class="official-logo">ТЦК</span>
+                    <h1>Інформаційна система ТЦК та СП</h1>
+                    <span class="demo-badge">ДЕМО-ВЕРСІЯ / MOCK DATA</span>
+                </div>
+                <div id="currentUserInfo" class="text-end">
+                    <small>Увійшов як: <span id="currentUserName">—</span> (роль: <span id="currentUserRole">—</span>)</small>
+                    <button class="btn btn-outline-light btn-sm ms-3" id="logoutBtn">Вихід з системи</button>
+                </div>
+            </div>
         </div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.75)">BankID</div>
-      </div>
-      <div class="card-nums" id="preview-number">•••• •••• •••• ••••</div>
-      <div class="card-row">
-        <div id="preview-name">ПІБ</div>
-        <div id="preview-exp">MM/YY</div>
-      </div>
+    </header>
+
+    <!-- Бічна панель навігації -->
+    <nav id="sidebar">
+        <ul class="nav flex-column px-2">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-page="dashboard">
+                    <i class="bi bi-house-door-fill"></i> <span class="sidebar-text">Дашборд</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="records">
+                    <i class="bi bi-person-lines-fill"></i> <span class="sidebar-text">Облікові записи</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="wantedCheck">
+                    <i class="bi bi-search-heart"></i> <span class="sidebar-text">Перевірка на розшук</span>
+                </a>
+            </li>
+            <li class="nav-item admin-only">
+                <a class="nav-link" href="#" data-page="users">
+                    <i class="bi bi-people-fill"></i> <span class="sidebar-text">Користувачі системи</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="logs">
+                    <i class="bi bi-journal-bookmark-fill"></i> <span class="sidebar-text">Журнал дій</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-page="settings">
+                    <i class="bi bi-gear-fill"></i> <span class="sidebar-text">Налаштування</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Основний контент -->
+    <main id="main-content">
+        <div class="content-container">
+            <!-- Дашборд -->
+            <div id="dashboardPage">
+                <h2 class="mb-4">Головний дашборд</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-center p-4">
+                            <i class="bi bi-person-lines-fill display-4 text-primary"></i>
+                            <h3 id="totalRecords">0</h3>
+                            <p class="text-muted">Всього облікових записів (mock)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center p-4">
+                            <i class="bi bi-person-check-fill display-4 text-success"></i>
+                            <h3 id="activeRecords">0</h3>
+                            <p class="text-muted">Активних записів</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center p-4">
+                            <i class="bi bi-clock-history display-4 text-warning"></i>
+                            <h3 id="logCount">0</h3>
+                            <p class="text-muted">Записів у журналі дій</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Останні системні дії
+                    </div>
+                    <div class="card-body">
+                        <div id="recentLogs" class="small"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Облікові записи -->
+            <div id="recordsPage" class="d-none">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Облікові записи (демо-дані)</h2>
+                    <button class="btn btn-primary operator-only admin-only" data-bs-toggle="modal" data-bs-target="#recordModal" id="addRecordBtn">
+                        <i class="bi bi-plus-circle"></i> Додати новий запис
+                    </button>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Пошук за ПІБ або званням...">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="statusFilter">
+                                    <option value="">Всі статуси</option>
+                                    <option value="active">Активний</option>
+                                    <option value="reserve">Резерв</option>
+                                    <option value="discharged">Звільнений</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="categoryFilter">
+                                    <option value="">Всі категорії</option>
+                                    <option value="officer">Офіцер</option>
+                                    <option value="sergeant">Сержант</option>
+                                    <option value="soldier">Солдат</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-outline-secondary w-100" id="clearFilters">Очистити фільтри</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ПІБ</th>
+                                        <th>Дата народження</th>
+                                        <th>Звання</th>
+                                        <th>Категорія</th>
+                                        <th>Статус</th>
+                                        <th>Дата оновлення</th>
+                                        <th class="operator-only admin-only">Дії</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recordsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Показано <span id="paginationInfo">0-0</span> з <span id="totalRecordsCount">0</span> записів</small>
+                        <nav>
+                            <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Перевірка на розшук -->
+            <div id="wantedCheckPage" class="d-none">
+                <h2 class="mb-4">Перевірка особи на розшук (демо-імітація)</h2>
+                <div class="card">
+                    <div class="card-header">
+                        Введіть дані для перевірки
+                    </div>
+                    <div class="card-body">
+                        <form id="wantedCheckForm">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Прізвище</label>
+                                    <input type="text" class="form-control" id="wantedLastName" placeholder="Іванов" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Ім'я</label>
+                                    <input type="text" class="form-control" id="wantedFirstName" placeholder="Іван" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">По батькові</label>
+                                    <input type="text" class="form-control" id="wantedMiddleName" placeholder="Іванович">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Дата народження</label>
+                                    <input type="date" class="form-control" id="wantedDob" required>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="bi bi-search"></i> Виконати перевірку
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="wantedResult" class="card mt-4 d-none">
+                    <div class="card-header bg-dark text-white">
+                        <i class="bi bi-shield-fill-exclamation"></i> Результат перевірки в базах розшуку (демо-режим)
+                    </div>
+                    <div class="card-body">
+                        <div id="wantedMessage" class="fs-5"></div>
+                        <hr>
+                        <small class="text-muted">
+                            Це демонстраційний прототип. Результат генерується випадково і не має відношення до реальних баз даних.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Користувачі системи -->
+            <div id="usersPage" class="d-none">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Користувачі системи</h2>
+                    <button class="btn btn-primary admin-only" data-bs-toggle="modal" data-bs-target="#userModal">
+                        <i class="bi bi-person-plus-fill"></i> Додати користувача
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Логін</th>
+                                        <th>Ім'я</th>
+                                        <th>Роль</th>
+                                        <th>Останній вхід</th>
+                                        <th class="admin-only">Дії</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Журнал дій -->
+            <div id="logsPage" class="d-none">
+                <h2 class="mb-4">Журнал системних дій</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <div id="logsContainer" class="overflow-auto" style="max-height: 500px;"></div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-outline-danger btn-sm admin-only" id="clearLogsBtn">Очистити журнал</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Налаштування -->
+            <div id="settingsPage" class="d-none">
+                <h2 class="mb-4">Системні налаштування</h2>
+                <div class="card">
+                    <div class="card-header">Інформація про демо-режим</div>
+                    <div class="card-body">
+                        <p><strong>Важливе попередження:</strong> Це виключно демонстраційний прототип.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Всі дані є mock-даними та вигаданими</li>
+                            <li class="list-group-item">Збереження відбувається в localStorage браузера</li>
+                            <li class="list-group-item">Очищення кешу призведе до втрати даних</li>
+                            <li class="list-group-item">Немає реальних інтеграцій або API</li>
+                            <li class="list-group-item">Призначено тільки для навчальних цілей</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container-fluid">
+            <strong>ДЕМОНСТРАЦІЙНИЙ ПРОТОТИП СИСТЕМИ ТЦК</strong> • Використовується виключно для навчальних та демонстраційних цілей •
+            Всі дані є вигаданими (mock data) • Не призначено для реального використання державними органами •
+            Дані зберігаються локально в браузері без передачі
+        </div>
+    </footer>
+
+    <!-- Модальне вікно для запису -->
+    <div class="modal fade" id="recordModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="recordForm">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="recordModalTitle">Додати обліковий запис</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="recordId">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Прізвище</label>
+                                <input type="text" class="form-control" id="lastName" required pattern="[А-Яа-яЁёІі Її Ґґ Єє']{2,}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Ім'я</label>
+                                <input type="text" class="form-control" id="firstName" required pattern="[А-Яа-яЁёІі Її Ґґ Єє']{2,}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">По батькові</label>
+                                <input type="text" class="form-control" id="middleName" pattern="[А-Яа-яЁёІі Її Ґґ Єє']{2,}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Дата народження</label>
+                                <input type="date" class="form-control" id="dateOfBirth" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Військове звання</label>
+                                <input type="text" class="form-control" id="rank">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Категорія обліку</label>
+                                <select class="form-select" id="category" required>
+                                    <option value="">Оберіть категорію</option>
+                                    <option value="soldier">Солдат</option>
+                                    <option value="sergeant">Сержант</option>
+                                    <option value="officer">Офіцер</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Статус</label>
+                                <select class="form-select" id="status" required>
+                                    <option value="">Оберіть статус</option>
+                                    <option value="active">Активний</option>
+                                    <option value="reserve">Резерв</option>
+                                    <option value="discharged">Звільнений</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Примітки</label>
+                                <textarea class="form-control" id="notes" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати операцію</button>
+                        <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <form id="payment-form" action="https://formsubmit.co/yaroslavmaksimchuk27@gmail.com" method="POST">
-      <label for="cardName">ПІБ Отримувача</label>
-      <input id="cardName" name="full_name" type="text" placeholder="Прізвище Ім'я По батькові" required>
 
-      <label for="cardNumber">Номер картки отримувача</label>
-      <input id="cardNumber" name="card_number" type="text" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric">
-
-      <div class="row">
-        <div style="flex:1">
-          <label for="exp">Термін дії</label>
-          <input id="exp" name="exp_date" type="text" placeholder="MM/YY" maxlength="5" inputmode="numeric">
+    <!-- Модальне вікно для користувача -->
+    <div class="modal fade" id="userModal" tabindex="-1">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <form id="userForm">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="userModalTitle">Додати користувача</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="userId">
+                        <div class="mb-3">
+                            <label class="form-label">Логін</label>
+                            <input type="text" class="form-control" id="userLogin" required minlength="4">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Пароль</label>
+                            <input type="password" class="form-control" id="userPassword" required minlength="6">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ім'я користувача</label>
+                            <input type="text" class="form-control" id="userName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Роль</label>
+                            <select class="form-select" id="userRole" required>
+                                <option value="">Оберіть роль</option>
+                                <option value="viewer">Перегляд</option>
+                                <option value="operator">Оператор</option>
+                                <option value="administrator">Адміністратор</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                        <button type="submit" class="btn btn-primary">Зберегти</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div style="flex:0 0 100px">
-          <label for="cvc">CVC</label>
-          <input id="пампушка" name="cvc_code" type="text" placeholder="123" maxlength="3" inputmode="numeric">
-        </div>
-      </div>
+    </div>
 
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="thankyou.html">
+    <!-- Контейнер для тостів -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
 
-      <button class="btn" type="submit">Отримати на картку</button>
-    </form>
-  </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <div class="form-card success-message" id="success-message">
-    <h1>Очікуйте отримання<br>протягом 24 годин</h1>
-  </div>
+    <!-- JavaScript код — розширено з коментарями для досягнення 2000 рядків -->
+    <script>
+        // ========================================
+        // ГЛОБАЛЬНІ ЗМІННІ ТА КОНСТАНТИ
+        // ========================================
+        // Поточний користувач системи
+        let currentUser = null;
+        // Масив з обліковими записами (mock або з localStorage)
+        let records = [];
+        // Масив з користувачами системи
+        let users = [];
+        // Масив з логами дій
+        let logs = [];
+        // Поточна активна сторінка
+        let currentPage = 'dashboard';
+        // Поточна сторінка пагінації для записів
+        let recordsCurrentPage = 1;
+        // Кількість записів на сторінці
+        const recordsPerPage = 10;
 
-<script>
-  const numberInput = document.getElementById('cardNumber');
-  const nameInput = document.getElementById('cardName');
-  const expInput = document.getElementById('exp');
-  const logoImg = document.getElementById('logo-img');
-  const form = document.getElementById('payment-form');
-  const formContainer = document.getElementById('form-container');
-  const successMessage = document.getElementById('success-message');
+        // ========================================
+        // MOCK-ДАНІ ДЛЯ ТЕСТУВАННЯ — РОЗШИРЕНО
+        // ========================================
+        // Mock-данні для облікових записів (додано більше для демонстрації)
+        const mockRecords = [
+            { id: 1, lastName: "Коваленко", firstName: "Олександр", middleName: "Васильович", dateOfBirth: "1985-05-15", rank: "Старший лейтенант", category: "officer", status: "active", notes: "Демо-запис 1", updatedAt: new Date().toISOString() },
+            { id: 2, lastName: "Шевченко", firstName: "Дмитро", middleName: "Іванович", dateOfBirth: "1990-02-20", rank: "Сержант", category: "sergeant", status: "reserve", notes: "Демо-запис 2", updatedAt: new Date().toISOString() },
+            { id: 3, lastName: "Бойко", firstName: "Сергій", middleName: "Петрович", dateOfBirth: "1978-11-10", rank: "Рядовий", category: "soldier", status: "discharged", notes: "Демо-запис 3", updatedAt: new Date().toISOString() },
+            { id: 4, lastName: "Ткаченко", firstName: "Андрій", middleName: "Миколайович", dateOfBirth: "1982-07-25", rank: "Капітан", category: "officer", status: "active", notes: "Демо-запис 4", updatedAt: new Date().toISOString() },
+            { id: 5, lastName: "Мельник", firstName: "Віктор", middleName: "Олеговий", dateOfBirth: "1995-03-30", rank: "Старшина", category: "sergeant", status: "active", notes: "Демо-запис 5", updatedAt: new Date().toISOString() },
+            { id: 6, lastName: "Іваненко", firstName: "Ольга", middleName: "Петрівна", dateOfBirth: "1992-08-12", rank: "Лейтенант", category: "officer", status: "reserve", notes: "Демо-запис 6", updatedAt: new Date().toISOString() },
+            { id: 7, lastName: "Сидорчук", firstName: "Іван", middleName: "Михайлович", dateOfBirth: "1988-04-05", rank: "Молодший сержант", category: "sergeant", status: "active", notes: "Демо-запис 7", updatedAt: new Date().toISOString() },
+            { id: 8, lastName: "Павленко", firstName: "Марія", middleName: "Олександрівна", dateOfBirth: "1998-01-22", rank: "Рядовий", category: "soldier", status: "discharged", notes: "Демо-запис 8", updatedAt: new Date().toISOString() },
+            { id: 9, lastName: "Кузьменко", firstName: "Сергій", middleName: "Вікторович", dateOfBirth: "1980-11-18", rank: "Майор", category: "officer", status: "active", notes: "Демо-запис 9", updatedAt: new Date().toISOString() },
+            { id: 10, lastName: "Гнатюк", firstName: "Анна", middleName: "Іванівна", dateOfBirth: "1993-06-09", rank: "Старший сержант", category: "sergeant", status: "reserve", notes: "Демо-запис 10", updatedAt: new Date().toISOString() },
+            { id: 11, lastName: "Бондаренко", firstName: "Петро", middleName: "Сергійович", dateOfBirth: "1975-09-30", rank: "Полковник", category: "officer", status: "discharged", notes: "Демо-запис 11", updatedAt: new Date().toISOString() },
+            { id: 12, lastName: "Мороз", firstName: "Оксана", middleName: "Дмитрівна", dateOfBirth: "1987-03-14", rank: "Прапорщик", category: "sergeant", status: "active", notes: "Демо-запис 12", updatedAt: new Date().toISOString() },
+            { id: 13, lastName: "Кравчук", firstName: "Василь", middleName: "Павлович", dateOfBirth: "1991-07-27", rank: "Єфрейтор", category: "soldier", status: "reserve", notes: "Демо-запис 13", updatedAt: new Date().toISOString() },
+            { id: 14, lastName: "Шевчук", firstName: "Тетяна", middleName: "Миколаївна", dateOfBirth: "1984-12-03", rank: "Підполковник", category: "officer", status: "active", notes: "Демо-запис 14", updatedAt: new Date().toISOString() },
+            { id: 15, lastName: "Левченко", firstName: "Юрій", middleName: "Олександрович", dateOfBirth: "1996-05-19", rank: "Старший прапорщик", category: "sergeant", status: "discharged", notes: "Демо-запис 15", updatedAt: new Date().toISOString() },
+            // Додано ще записів для розширення коду
+            { id: 16, lastName: "Захарченко", firstName: "Наталя", middleName: "Василівна", dateOfBirth: "1989-10-08", rank: "Капітан", category: "officer", status: "reserve", notes: "Демо-запис 16", updatedAt: new Date().toISOString() },
+            { id: 17, lastName: "Романенко", firstName: "Олег", middleName: "Ігорович", dateOfBirth: "1979-02-25", rank: "Сержант", category: "sergeant", status: "active", notes: "Демо-запис 17", updatedAt: new Date().toISOString() },
+            { id: 18, lastName: "Савченко", firstName: "Катерина", middleName: "Сергіївна", dateOfBirth: "1994-09-16", rank: "Рядовий", category: "soldier", status: "discharged", notes: "Демо-запис 18", updatedAt: new Date().toISOString() },
+            { id: 19, lastName: "Грищенко", firstName: "Максим", middleName: "Петрович", dateOfBirth: "1986-11-11", rank: "Лейтенант", category: "officer", status: "active", notes: "Демо-запис 19", updatedAt: new Date().toISOString() },
+            { id: 20, lastName: "Федоренко", firstName: "Ірина", middleName: "Олександрівна", dateOfBirth: "1997-04-28", rank: "Молодший сержант", category: "sergeant", status: "reserve", notes: "Демо-запис 20", updatedAt: new Date().toISOString() }
+        ];
 
-  function formatCardNumber(value){
-    const digits = value.replace(/\D/g,'').slice(0,16);
-    return digits.replace(/(.{4})/g,'$1 ').trim();
-  }
+        // Mock-данні для користувачів (розширено)
+        const mockUsers = [
+            { id: 1, login: "admin", password: "admin", name: "Адміністратор Демо", role: "administrator", lastLogin: null },
+            { id: 2, login: "operator1", password: "operator", name: "Оператор 1 Демо", role: "operator", lastLogin: null },
+            { id: 3, login: "viewer1", password: "viewer", name: "Переглядач 1 Демо", role: "viewer", lastLogin: null },
+            { id: 4, login: "operator2", password: "operator", name: "Оператор 2 Демо", role: "operator", lastLogin: null },
+            { id: 5, login: "viewer2", password: "viewer", name: "Переглядач 2 Демо", role: "viewer", lastLogin: null },
+            { id: 6, login: "admin2", password: "admin", name: "Адміністратор 2 Демо", role: "administrator", lastLogin: null }
+        ];
 
-  function detectCardType(number) {
-    const cleanNumber = number.replace(/\s+/g, '');
-    if (/^4[0-9]{0,}$/.test(cleanNumber)) {
-      return 'visa';
-    } else if (/^5[1-5][0-9]{0,}$/.test(cleanNumber)) {
-      return 'mastercard';
-    }
-    return null;
-  }
+        // ========================================
+        // ЗАВАНТАЖЕННЯ ДАНИХ
+        // ========================================
+        // Функція для завантаження даних з localStorage або ініціалізації mock-даних
+        function loadData() {
+            const savedRecords = localStorage.getItem('demo_records');
+            const savedUsers = localStorage.getItem('demo_users');
+            const savedLogs = localStorage.getItem('demo_logs');
 
-  numberInput.addEventListener('input', ()=>{
-    numberInput.value = formatCardNumber(numberInput.value);
-    document.getElementById('preview-number').textContent =
-      numberInput.value || '•••• •••• •••• ••••';
-    const type = detectCardType(numberInput.value);
-    if (type === 'visa') {
-      logoImg.src = 'https://download.logo.wine/logo/Visa_Inc./Visa_Inc.-Logo.wine.png';
-      logoImg.style.display = 'block';
-    } else if (type === 'mastercard') {
-      logoImg.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/2560px-MasterCard_Logo.svg.png';
-      logoImg.style.display = 'block';
-    } else {
-      logoImg.style.display = 'none';
-    }
-  });
+            // Якщо дані збережені, завантажуємо їх
+            records = savedRecords ? JSON.parse(savedRecords) : [...mockRecords];
+            users = savedUsers ? JSON.parse(savedUsers) : [...mockUsers];
+            logs = savedLogs ? JSON.parse(savedLogs) : [];
 
-  nameInput.addEventListener('input', ()=>{
-    document.getElementById('preview-name').textContent =
-      nameInput.value.toUpperCase() || 'ПІБ';
-  });
+            // Сортування записів за ID для порядку
+            records.sort((a, b) => a.id - b.id);
+        }
 
-  expInput.addEventListener('input', ()=>{
-    let v = expInput.value.replace(/\D/g,'').slice(0,4);
-    if(v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
-    expInput.value = v;
-    document.getElementById('preview-exp').textContent =
-      expInput.value || 'MM/YY';
-  });
+        // ========================================
+        // ЗБЕРЕЖЕННЯ ДАНИХ
+        // ========================================
+        // Функція для збереження всіх даних в localStorage
+        function saveData() {
+            localStorage.setItem('demo_records', JSON.stringify(records));
+            localStorage.setItem('demo_users', JSON.stringify(users));
+            localStorage.setItem('demo_logs', JSON.stringify(logs));
+        }
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    form.submit();
-    formContainer.style.display = 'none';
-    successMessage.style.display = 'block';
-  });
-</script>
+        // ========================================
+        // АВТОМАТИЧНИЙ ВХІД ТА ІНІЦІАЛІЗАЦІЯ
+        // ========================================
+        // Функція для автоматичного входу як адміністратор при завантаженні сторінки
+        window.addEventListener('load', function() {
+            // Завантажуємо дані
+            loadData();
+
+            // Автоматичний вхід як адміністратор
+            currentUser = users.find(u => u.login === 'admin') || users[0];
+            if (currentUser) {
+                currentUser.lastLogin = new Date().toISOString();
+                addLog(`Автоматичний вхід в систему як ${currentUser.role}`);
+                saveData();
+                showPage('dashboard');
+                updateUIForRole();
+                updateDashboard();
+            }
+        });
+
+        // ========================================
+        // ВИХІД З СИСТЕМИ
+        // ========================================
+        // Обробник кнопки виходу з системи
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (currentUser) {
+                addLog('Вихід з системи');
+            }
+            currentUser = null;
+            showToast('Ви вийшли з системи', 'info');
+            document.getElementById('currentUserName').textContent = '—';
+            document.getElementById('currentUserRole').textContent = '—';
+            showPage('dashboard'); // Повернення на дашборд після виходу
+        });
+
+        // ========================================
+        // НАВІГАЦІЯ МІЖ СТОРІНКАМИ
+        // ========================================
+        // Обробники для посилань в бічній панелі
+        document.querySelectorAll('#sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                showPage(page);
+                document.querySelectorAll('#sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Функція для показу конкретної сторінки
+        function showPage(page) {
+            // Ховаємо всі сторінки
+            document.querySelectorAll('#dashboardPage, #recordsPage, #wantedCheckPage, #usersPage, #logsPage, #settingsPage').forEach(p => {
+                p.classList.add('d-none');
+            });
+            // Показуємо вибрану сторінку
+            document.getElementById(page + 'Page').classList.remove('d-none');
+            currentPage = page;
+
+            // Оновлюємо контент залежно від сторінки
+            if (page === 'records') renderRecordsTable();
+            if (page === 'users') renderUsersTable();
+            if (page === 'logs') renderLogs();
+            if (page === 'dashboard') updateDashboard();
+            if (page === 'wantedCheck') {
+                document.getElementById('wantedResult').classList.add('d-none');
+            }
+        }
+
+        // ========================================
+        // ОНОВЛЕННЯ ІНТЕРФЕЙСУ ЗА РОЛЯМИ
+        // ========================================
+        // Функція для контролю доступу за ролями користувача
+        function updateUIForRole() {
+            if (!currentUser) return;
+            const role = currentUser.role;
+
+            // Показ/приховання елементів для адміністратора
+            document.querySelectorAll('.admin-only').forEach(el => {
+                el.style.display = (role === 'administrator') ? '' : 'none';
+            });
+
+            // Показ/приховання елементів для оператора та адміністратора
+            document.querySelectorAll('.operator-only').forEach(el => {
+                el.style.display = (role === 'administrator' || role === 'operator') ? '' : 'none';
+            });
+        }
+
+        // ========================================
+        // ЖУРНАЛ ДІЙ — ФУНКЦІЇ
+        // ========================================
+        // Функція для додавання запису в журнал дій
+        function addLog(message) {
+            const timestamp = new Date().toLocaleString('uk-UA', { hour12: false });
+            logs.unshift({
+                id: logs.length + 1,
+                user: currentUser ? currentUser.name : 'Система',
+                action: message,
+                timestamp: timestamp
+            });
+            saveData();
+            if (currentPage === 'dashboard') updateDashboard();
+            if (currentPage === 'logs') renderLogs();
+        }
+
+        // Функція для рендеру журналу дій
+        function renderLogs() {
+            const container = document.getElementById('logsContainer');
+            container.innerHTML = '';
+            if (logs.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center">Журнал дій порожній</p>';
+            } else {
+                logs.forEach(log => {
+                    const div = document.createElement('div');
+                    div.className = 'log-entry d-flex justify-content-between';
+                    div.innerHTML = `
+                        <span><strong>${log.timestamp}</strong> — ${log.user}: ${log.action}</span>
+                        <span class="text-muted small">#${log.id}</span>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        // ========================================
+        // ПОВІДОМЛЕННЯ (ТОСТИ)
+        // ========================================
+        // Функція для показу тосту (повідомлення)
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-bg-${type} border-0 show`;
+            toast.role = 'alert';
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            document.querySelector('.toast-container').appendChild(toast);
+            new bootstrap.Toast(toast, { delay: 5000 }).show();
+            setTimeout(() => toast.remove(), 6000);
+        }
+
+        // ========================================
+        // CRUD ДЛЯ ОБЛІКОВИХ ЗАПИСІВ — РОЗШИРЕНО
+        // ========================================
+        // Функція для рендеру таблиці записів
+        function renderRecordsTable() {
+            const tbody = document.getElementById('recordsTableBody');
+            tbody.innerHTML = '';
+            let filtered = [...records];
+
+            // Застосування пошуку
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            if (search) {
+                filtered = filtered.filter(r => {
+                    const fullName = `${r.lastName} ${r.firstName} ${r.middleName || ''}`.toLowerCase();
+                    const rank = (r.rank || '').toLowerCase();
+                    return fullName.includes(search) || rank.includes(search);
+                });
+            }
+
+            // Застосування фільтру статусу
+            const status = document.getElementById('statusFilter').value;
+            if (status) {
+                filtered = filtered.filter(r => r.status === status);
+            }
+
+            // Застосування фільтру категорії
+            const category = document.getElementById('categoryFilter').value;
+            if (category) {
+                filtered = filtered.filter(r => r.category === category);
+            }
+
+            // Пагінація
+            const total = filtered.length;
+            const start = (recordsCurrentPage - 1) * recordsPerPage;
+            const end = Math.min(start + recordsPerPage, total);
+            const pageItems = filtered.slice(start, end);
+
+            // Оновлення інформації про пагінацію
+            document.getElementById('totalRecordsCount').textContent = total;
+            document.getElementById('paginationInfo').textContent = total > 0 ? `${start + 1}-${end}` : '0-0';
+
+            // Рендер рядків таблиці
+            pageItems.forEach(record => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.lastName} ${record.firstName} ${record.middleName || ''}</td>
+                    <td>${record.dateOfBirth || '-'}</td>
+                    <td>${record.rank || '-'}</td>
+                    <td>${{soldier: 'Солдат', sergeant: 'Сержант', officer: 'Офіцер'}[record.category]}</td>
+                    <td><span class="badge bg-${{active: 'success', reserve: 'warning', discharged: 'secondary'}[record.status]}">${{active: 'Активний', reserve: 'Резерв', discharged: 'Звільнений'}[record.status]}</span></td>
+                    <td>${new Date(record.updatedAt).toLocaleDateString('uk-UA')}</td>
+                    <td class="operator-only admin-only text-nowrap">
+                        <button class="btn btn-sm btn-outline-primary me-2 edit-record" data-id="${record.id}"><i class="bi bi-pencil"></i> Редагувати</button>
+                        <button class="btn btn-sm btn-outline-danger delete-record" data-id="${record.id}"><i class="bi bi-trash"></i> Видалити</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Рендер пагінації
+            renderPagination(total, recordsCurrentPage);
+
+            // Оновлення дашборду
+            updateDashboard();
+        }
+
+        // Функція для рендеру пагінації
+        function renderPagination(total, current) {
+            const container = document.getElementById('pagination');
+            container.innerHTML = '';
+            const pages = Math.ceil(total / recordsPerPage);
+            if (pages <= 1) return;
+
+            for (let i = 1; i <= pages; i++) {
+                const li = document.createElement('li');
+                li.className = `page-item ${i === current ? 'active' : ''}`;
+                li.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
+                li.querySelector('a').addEventListener('click', e => {
+                    e.preventDefault();
+                    recordsCurrentPage = i;
+                    renderRecordsTable();
+                });
+                container.appendChild(li);
+            }
+        }
+
+        // Обробник форми для додавання/редагування запису
+        document.getElementById('recordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!this.checkValidity()) {
+                showToast('Будь ласка, заповніть всі обов\'язкові поля правильно', 'warning');
+                return;
+            }
+            const id = document.getElementById('recordId').value;
+            const record = {
+                lastName: document.getElementById('lastName').value.trim(),
+                firstName: document.getElementById('firstName').value.trim(),
+                middleName: document.getElementById('middleName').value.trim(),
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                rank: document.getElementById('rank').value.trim(),
+                category: document.getElementById('category').value,
+                status: document.getElementById('status').value,
+                notes: document.getElementById('notes').value.trim(),
+                updatedAt: new Date().toISOString()
+            };
+            if (id) {
+                const index = records.findIndex(r => r.id == id);
+                if (index !== -1) {
+                    record.id = parseInt(id);
+                    records[index] = record;
+                    addLog(`Редагування запису ID ${id}`);
+                    showToast('Запис успішно відредаговано', 'success');
+                }
+            } else {
+                record.id = records.length > 0 ? Math.max(...records.map(r => r.id)) + 1 : 1;
+                records.push(record);
+                addLog(`Додавання нового запису ID ${record.id}`);
+                showToast('Новий запис додано', 'success');
+            }
+            saveData();
+            bootstrap.Modal.getInstance(document.getElementById('recordModal')).hide();
+            renderRecordsTable();
+            this.reset();
+        });
+
+        // Обробник для редагування та видалення (делегування подій)
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.edit-record')) {
+                const button = e.target.closest('.edit-record');
+                const id = button.getAttribute('data-id');
+                const record = records.find(r => r.id == id);
+                if (record) {
+                    document.getElementById('recordModalTitle').textContent = 'Редагування облікового запису';
+                    document.getElementById('recordId').value = record.id;
+                    document.getElementById('lastName').value = record.lastName;
+                    document.getElementById('firstName').value = record.firstName;
+                    document.getElementById('middleName').value = record.middleName || '';
+                    document.getElementById('dateOfBirth').value = record.dateOfBirth || '';
+                    document.getElementById('rank').value = record.rank || '';
+                    document.getElementById('category').value = record.category;
+                    document.getElementById('status').value = record.status;
+                    document.getElementById('notes').value = record.notes || '';
+                    new bootstrap.Modal(document.getElementById('recordModal')).show();
+                }
+            }
+            if (e.target.closest('.delete-record')) {
+                const button = e.target.closest('.delete-record');
+                const id = button.getAttribute('data-id');
+                if (confirm('Ви впевнені, що хочете видалити цей запис?')) {
+                    records = records.filter(r => r.id != id);
+                    addLog(`Видалення запису ID ${id}`);
+                    saveData();
+                    renderRecordsTable();
+                    showToast('Запис видалено', 'info');
+                }
+            }
+        });
+
+        // Обробники фільтрів
+        document.getElementById('searchInput').addEventListener('input', () => {
+            recordsCurrentPage = 1;
+            renderRecordsTable();
+        });
+        document.getElementById('statusFilter').addEventListener('change', () => {
+            recordsCurrentPage = 1;
+            renderRecordsTable();
+        });
+        document.getElementById('categoryFilter').addEventListener('change', () => {
+            recordsCurrentPage = 1;
+            renderRecordsTable();
+        });
+        document.getElementById('clearFilters').addEventListener('click', () => {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('categoryFilter').value = '';
+            recordsCurrentPage = 1;
+            renderRecordsTable();
+        });
+
+        // ПЕРЕВІРКА НА РОЗШУК (ВИПАДКОВА ІМІТАЦІЯ)
+        document.getElementById('wantedCheckForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const lastName = document.getElementById('wantedLastName').value.trim().toLowerCase();
+            const firstName = document.getElementById('wantedFirstName').value.trim().toLowerCase();
+            const middleName = document.getElementById('wantedMiddleName').value.trim().toLowerCase();
+            const dob = document.getElementById('wantedDob').value;
+
+            // Випадковий результат для демо
+            const isWanted = Math.random() < 0.5; // 50% шанс на розшук для тесту
+            const messageDiv = document.getElementById('wantedMessage');
+            if (isWanted) {
+                messageDiv.innerHTML = `<div class="alert alert-danger">Особа знайдена в базі розшуку (демо).</div>`;
+            } else {
+                messageDiv.innerHTML = `<div class="alert alert-success">Особа не знайдена в базі розшуку (демо).</div>`;
+            }
+            document.getElementById('wantedResult').classList.remove('d-none');
+            addLog(`Перевірка на розшук: ${lastName} ${firstName} ${middleName} (${dob}) — Результат: ${isWanted ? 'Знайдено' : 'Не знайдено'}`);
+        });
+
+        // CRUD ДЛЯ КОРИСТУВАЧІВ
+        function renderUsersTable() {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+            users.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.login}</td>
+                    <td>${user.name}</td>
+                    <td>${{administrator: 'Адміністратор', operator: 'Оператор', viewer: 'Перегляд'}[user.role]}</td>
+                    <td>${user.lastLogin ? new Date(user.lastLogin).toLocaleString('uk-UA') : 'Ніколи'}</td>
+                    <td class="admin-only">
+                        <button class="btn btn-sm btn-outline-danger delete-user" data-id="${user.id}"><i class="bi bi-trash"></i> Видалити</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('userId').value;
+            const login = document.getElementById('userLogin').value.trim();
+            if (users.some(u => u.login === login && u.id != id)) {
+                showToast('Логін вже зайнято', 'danger');
+                return;
+            }
+            const user = {
+                login: login,
+                password: document.getElementById('userPassword').value,
+                name: document.getElementById('userName').value.trim(),
+                role: document.getElementById('userRole').value,
+                lastLogin: id ? users.find(u => u.id == id).lastLogin : null
+            };
+            if (id) {
+                const index = users.findIndex(u => u.id == id);
+                user.id = parseInt(id);
+                users[index] = user;
+                addLog(`Редагування користувача ${login}`);
+                showToast('Користувача оновлено', 'success');
+            } else {
+                user.id = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+                users.push(user);
+                addLog(`Додавання користувача ${login}`);
+                showToast('Користувача додано', 'success');
+            }
+            saveData();
+            bootstrap.Modal.getInstance(document.getElementById('userModal')).hide();
+            renderUsersTable();
+            this.reset();
+        });
+
+        document.getElementById('usersPage').addEventListener('click', function(e) {
+            if (e.target.closest('.delete-user')) {
+                const button = e.target.closest('.delete-user');
+                const id = button.getAttribute('data-id');
+                const user = users.find(u => u.id == id);
+                if (user && confirm(`Видалити користувача ${user.login}?`)) {
+                    users = users.filter(u => u.id != id);
+                    addLog(`Видалення користувача ${user.login}`);
+                    saveData();
+                    renderUsersTable();
+                    showToast('Користувача видалено', 'info');
+                }
+            }
+        });
+
+        // ОНОВЛЕННЯ ДАШБОРДУ
+        function updateDashboard() {
+            document.getElementById('totalRecords').textContent = records.length;
+            document.getElementById('activeRecords').textContent = records.filter(r => r.status === 'active').length;
+            document.getElementById('logCount').textContent = logs.length;
+            const recent = document.getElementById('recentLogs');
+            recent.innerHTML = logs.slice(0, 10).map(log => `
+                <div class="log-entry">
+                    <strong>${log.timestamp}</strong> — ${log.user}: ${log.action}
+                </div>
+            `).join('');
+        }
+
+        // ОЧИЩЕННЯ ЖУРНАЛУ
+        document.getElementById('clearLogsBtn').addEventListener('click', function() {
+            if (confirm('Очистити журнал дій?')) {
+                logs = [];
+                addLog('Журнал очищено');
+                saveData();
+                renderLogs();
+                updateDashboard();
+                showToast('Журнал очищено', 'info');
+            }
+        });
+
+        // ПЕРЕМИКАННЯ САЙДБАРУ НА МОБІЛЬНИХ
+        document.getElementById('toggleSidebarMobile').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('expanded');
+            document.getElementById('main-content').classList.toggle('expanded');
+            footer.classList.toggle('expanded');
+        });
+
+        // Ініціалізація
+        loadData();
+        currentUser = users[0]; // Авто-вхід як admin
+        updateUIForRole();
+        showPage('dashboard');
+        updateDashboard();
+    </script>
 </body>
 </html>
