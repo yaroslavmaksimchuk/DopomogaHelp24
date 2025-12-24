@@ -1011,6 +1011,7 @@
 </head>
 <body>
     <!-- Шапка -->
+    <!-- Шапка -->
 <header>
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between">
@@ -1175,53 +1176,51 @@
             </div>
 
             <!-- Перевірка на розшук -->
-            <div id="wantedCheckPage" class="d-none">
-                <h2 class="mb-4">Перевірка особи на розшук (демо-імітація)</h2>
-                <div class="card">
-                    <div class="card-header">
-                        Введіть дані для перевірки
+<div id="wantedCheckPage" class="d-none">
+    <h2 class="mb-4">Перевірка особи на розшук (демо-імітація)</h2>
+    <div class="card">
+        <div class="card-header">
+            Введіть дані для перевірки
+        </div>
+        <div class="card-body">
+            <form id="wantedCheckForm">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Прізвище</label>
+                        <input type="text" class="form-control" id="wantedLastName" placeholder="Іванов" required>
                     </div>
-                    <div class="card-body">
-                        <form id="wantedCheckForm">
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">Прізвище</label>
-                                    <input type="text" class="form-control" id="wantedLastName" placeholder="Іванов" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Ім'я</label>
-                                    <input type="text" class="form-control" id="wantedFirstName" placeholder="Іван" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">По батькові</label>
-                                    <input type="text" class="form-control" id="wantedMiddleName" placeholder="Іванович">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Дата народження</label>
-                                    <input type="date" class="form-control" id="wantedDob" required>
-                                </div>
-                                <div class="col-md-6 d-flex align-items-end">
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        <i class="bi bi-search"></i> Виконати перевірку
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col-md-4">
+                        <label class="form-label">Ім'я</label>
+                        <input type="text" class="form-control" id="wantedFirstName" placeholder="Іван" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">По батькові</label>
+                        <input type="text" class="form-control" id="wantedMiddleName" placeholder="Іванович">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Дата народження</label>
+                        <input type="date" class="form-control" id="wantedDob" required>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-search"></i> Виконати перевірку
+                        </button>
                     </div>
                 </div>
-                <div id="wantedResult" class="card mt-4 d-none">
-                    <div class="card-header bg-dark text-white">
-                        <i class="bi bi-shield-fill-exclamation"></i> Результат перевірки в базах розшуку (демо-режим)
-                    </div>
-                    <div class="card-body">
-                        <div id="wantedMessage" class="fs-5"></div>
-                        <hr>
-                        <small class="text-muted">
-                            Це демонстраційний прототип. Результат генерується випадково і не має відношення до реальних баз даних.
-                        </small>
-                    </div>
-                </div>
-            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- РЕЗУЛЬТАТ ПЕРЕВІРКИ — ОНОВЛЕНИЙ З ДЕТАЛЯМИ -->
+    <div id="wantedResult" class="card mt-4 d-none">
+        <div class="card-header bg-danger text-white">
+            <i class="bi bi-shield-fill-exclamation fs-4"></i> РЕЗУЛЬТАТ ПЕРЕВІРКИ В БАЗАХ РОЗШУКУ МВС УКРАЇНИ (демо-режим)
+        </div>
+        <div class="card-body">
+            <div id="wantedMessage"></div>
+        </div>
+    </div>
+</div>
 
             <!-- Користувачі системи -->
             <div id="usersPage" class="d-none">
@@ -1816,25 +1815,70 @@
             renderRecordsTable();
         });
 
-        // ПЕРЕВІРКА НА РОЗШУК (ВИПАДКОВА ІМІТАЦІЯ)
-        document.getElementById('wantedCheckForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const lastName = document.getElementById('wantedLastName').value.trim().toLowerCase();
-            const firstName = document.getElementById('wantedFirstName').value.trim().toLowerCase();
-            const middleName = document.getElementById('wantedMiddleName').value.trim().toLowerCase();
-            const dob = document.getElementById('wantedDob').value;
+        // ПЕРЕВІРКА НА РОЗШУК — З МІТКАМИ ПІБ + ПОВНА ДАТА НАРОДЖЕННЯ
+document.getElementById('wantedCheckForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            // Випадковий результат для демо
-            const isWanted = Math.random() < 0.5; // 50% шанс на розшук для тесту
-            const messageDiv = document.getElementById('wantedMessage');
-            if (isWanted) {
-                messageDiv.innerHTML = `<div class="alert alert-danger">Особа знайдена в базі розшуку (демо).</div>`;
-            } else {
-                messageDiv.innerHTML = `<div class="alert alert-success">Особа не знайдена в базі розшуку (демо).</div>`;
-            }
-            document.getElementById('wantedResult').classList.remove('d-none');
-            addLog(`Перевірка на розшук: ${lastName} ${firstName} ${middleName} (${dob}) — Результат: ${isWanted ? 'Знайдено' : 'Не знайдено'}`);
-        });
+    const lastName = document.getElementById('wantedLastName').value.trim();
+    const firstName = document.getElementById('wantedFirstName').value.trim();
+    const middleName = document.getElementById('wantedMiddleName').value.trim() || '—';
+    const dob = document.getElementById('wantedDob').value; // формат YYYY-MM-DD
+
+    // Форматуємо повну дату народження: ДД.ММ.РРРР
+    let fullBirthDate = 'невідома';
+    if (dob) {
+        const [year, month, day] = dob.split('-');
+        fullBirthDate = `${day}.${month}.${year}`;
+    }
+
+    // Випадковий результат: ~40% шанс знайти в розшуку
+    const isWanted = Math.random() < 0.4;
+
+    const messageDiv = document.getElementById('wantedMessage');
+    let content = '';
+
+    // Блок з ПІБ
+    const pibBlock = `
+        <div class="mb-4">
+            <p class="mb-2"><strong>Прізвище:</strong> <span class="fw-bold fs-5">${lastName}</span></p>
+            <p class="mb-2"><strong>Ім'я:</strong> <span class="fw-bold fs-5">${firstName}</span></p>
+            <p class="mb-2"><strong>По батькові:</strong> <span class="fw-bold fs-5">${middleName}</span></p>
+        </div>
+        <p class="mb-3"><strong>Дата народження:</strong> ${fullBirthDate}</p>`;
+
+    if (!isWanted) {
+        content = `
+            <div class="alert alert-success">
+                <h4><i class="bi bi-check-circle-fill"></i> Особу НЕ виявлено в базах розшуку</h4>
+                ${pibBlock}
+                <p>За введеними даними особа не значиться в розшуку МВС України.</p>
+            </div>`;
+    } else {
+        // Випадкова дата оголошення в розшук: від 2023 до 2025 року
+        const year = 2023 + Math.floor(Math.random() * 3); // 2023, 2024 або 2025
+        const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+        const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+        const wantedDate = `${day}.${month}.${year}`;
+
+        content = `
+            <div class="alert alert-danger">
+                <h4><i class="bi bi-exclamation-triangle-fill"></i> УВАГА! Особа ЗНАЙДЕНА В БАЗІ РОЗШУКУ</h4>
+                ${pibBlock}
+                <p><strong>Дата оголошення в розшук:</strong> ${wantedDate}</p>
+            </div>
+            <div class="mt-3 p-3 bg-light border rounded">
+                <small class="text-muted">
+                    У разі виявлення особи негайно повідомити найближчий підрозділ поліції за номером <strong>102</strong>.
+                </small>
+            </div>`;
+    }
+
+    messageDiv.innerHTML = content;
+    document.getElementById('wantedResult').classList.remove('d-none');
+
+    // Логування (з повною датою народження)
+    addLog(`Перевірка на розшук: ${lastName} ${firstName} ${middleName} (${fullBirthDate}) — Результат: ${isWanted ? 'ЗНАЙДЕНО' : 'Не знайдено'}`);
+});
 
         // CRUD ДЛЯ КОРИСТУВАЧІВ
         function renderUsersTable() {
@@ -1945,4 +1989,6 @@
     </script>
 </body>
 </html>
+</html>
+
 
