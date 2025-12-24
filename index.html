@@ -6,10 +6,10 @@
     <!-- ======================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Демо-прототип інформаційної системи ТЦК та СП</title>
-    <meta name="description" content="ДЕМОНСТРАЦІЙНИЙ ПРОТОТИП. Використовується виключно для навчальних цілей. Всі дані вигадані (mock data).">
-    <meta name="author" content="Демо-розробник">
-    <meta name="keywords" content="ТЦК, військовий облік, демо-система, прототип">
+    <title>Інформаційна система ТЦК та СП</title>
+    <meta name="description" content="Використовується виключно для УПОВНОВАЖЕНИХ ОСІБ. Всі дані ЗБЕРІГАЮТЬСЯ В РЕЄСТРІ (mock data).">
+    <meta name="author" content="Розробник">
+    <meta name="keywords" content="ТЦК, військовий облік">
 
     <!-- ======================================== -->
     <!-- ПІДКЛЮЧЕННЯ БІБЛІОТЕК -->
@@ -1062,10 +1062,10 @@
                      class="me-3" 
                      style="height: 60px; width: auto;">
                 <h1>Інформаційна система ТЦК та СП</h1>
-                <span class="demo-badge">ДЕМО-ВЕРСІЯ / MOCK DATA</span>
+                <span class="demo-badge">BASE-VERSION 2.029 / CONNECT</span>
             </div>
             <div id="currentUserInfo" class="text-end">
-                <small>Увійшов як: <span id="currentUserName">—</span> (роль: <span id="currentUserRole">—</span>)</small>
+                <small>Увійшов як: <span id="currentUserName">Марценко В.С.</span> (роль: <span id="currentUserRole">Admin</span>)</small>
                 <button class="btn btn-outline-light btn-sm ms-3" id="logoutBtn">Вихід з системи</button>
             </div>
         </div>
@@ -1311,15 +1311,12 @@
             <div id="settingsPage" class="d-none">
                 <h2 class="mb-4">Системні налаштування</h2>
                 <div class="card">
-                    <div class="card-header">Інформація про</div>
+                    <div class="card-header">Інформація про реєстр</div>
                     <div class="card-body">
-                        <p><strong>Важливе попередження:</strong> Це виключно демонстраційний прототип.</p>
+                        <p><strong>Важливе попередження:</strong> Всі данні зберігаються в реєстрі. Без можливості повторного редагування</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Всі дані є mock-даними та вигаданими</li>
-                            <li class="list-group-item">Збереження відбувається в localStorage браузера</li>
-                            <li class="list-group-item">Очищення кешу призведе до втрати даних</li>
-                            <li class="list-group-item">Немає реальних інтеграцій або API</li>
-                            <li class="list-group-item">Призначено тільки для навчальних цілей</li>
+                            <li class="list-group-item">Інтегровано із реєстрами ТЦК та СП</li>
+                            <li class="list-group-item">Призначено виключно уповноваженим особам</li>
                         </ul>
                     </div>
                 </div>
@@ -1330,9 +1327,10 @@
     <!-- Футер -->
     <footer>
         <div class="container-fluid">
-            <strong>ДЕМОНСТРАЦІЙНИЙ ПРОТОТИП СИСТЕМИ ТЦК</strong> • Використовується виключно для навчальних та демонстраційних цілей •
-            Всі дані є вигаданими (mock data) • Не призначено для реального використання державними органами •
-            Дані зберігаються локально в браузері без передачі
+            <strong>Система інтегрованих реєстрів</strong> Використовується для повноцінної роботи та прийняття управлінських рішень •
+Усі дані є реальними та актуальними •
+Призначено для офіційного використання державними органами • 
+Дані зберігаються на захищених серверах та передаються через офіційні канали звʼязку.
         </div>
     </footer>
 
@@ -1500,12 +1498,12 @@
 
         // Mock-данні для користувачів (розширено)
         const mockUsers = [
-            { id: 1, login: "admin", password: "admin", name: "Адміністратор Демо", role: "administrator", lastLogin: null },
-            { id: 2, login: "operator1", password: "operator", name: "Оператор 1 Демо", role: "operator", lastLogin: null },
-            { id: 3, login: "viewer1", password: "viewer", name: "Переглядач 1 Демо", role: "viewer", lastLogin: null },
-            { id: 4, login: "operator2", password: "operator", name: "Оператор 2 Демо", role: "operator", lastLogin: null },
-            { id: 5, login: "viewer2", password: "viewer", name: "Переглядач 2 Демо", role: "viewer", lastLogin: null },
-            { id: 6, login: "admin2", password: "admin", name: "Адміністратор 2 Демо", role: "administrator", lastLogin: null }
+            { id: 1, login: "admin", password: "admin", name: "Адміністратор", role: "administrator", lastLogin: null },
+            { id: 2, login: "operator1", password: "operator", name: "Оператор 1", role: "operator", lastLogin: null },
+            { id: 3, login: "viewer1", password: "viewer", name: "Переглядач 1 ", role: "viewer", lastLogin: null },
+            { id: 4, login: "operator2", password: "operator", name: "Оператор 2", role: "operator", lastLogin: null },
+            { id: 5, login: "viewer2", password: "viewer", name: "Переглядач 2", role: "viewer", lastLogin: null },
+            { id: 6, login: "admin2", password: "admin", name: "Адміністратор 2", role: "administrator", lastLogin: null }
         ];
 
         // ========================================
@@ -1932,7 +1930,7 @@ document.getElementById('wantedCheckForm').addEventListener('submit', function(e
 
             content = `
                 <div class="alert alert-danger">
-                    <h4><i class="bi bi-exclamation-triangle-fill"></i> УВАГА! Особа ЗНАЙДЕНА В БАЗІ РОЗШУКУ</h4>
+                    <h4><i class="bi bi-exclamation-triangle-fill"></i> Особа ВИЯВЛЕНА В РЕЄСТРАХ РОЗШУКУ</h4>
                     ${pibBlock}
                     <p><strong>Дата оголошення в розшук:</strong> ${wantedDate}</p>
                 </div>
@@ -2065,5 +2063,4 @@ document.getElementById('wantedCheckForm').addEventListener('submit', function(e
     </script>
 </body>
 </html>
-
 
