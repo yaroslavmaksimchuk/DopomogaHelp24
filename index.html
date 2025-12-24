@@ -1007,44 +1007,58 @@
         }
 
         /* Кінець стилів — загальна кількість рядків у CSS ~500 */
-            /* ======================================== */
-    /* ЕМБЛЕМА ЗСУ ЗЛІВА В ШАПЦІ (ЯК У СПРАВЖНЬОМУ) */
-    /* ======================================== */
-    .header-emblem {
-        height: 60px;
-        width: auto;
-        margin-right: 1rem;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-    }
+        /* Анімація для емблеми МВС */
+.mvs-logo {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
 
-    @media (max-width: 768px) {
-        .header-emblem {
-            height: 50px;
-        }
-    }
+/* Пульсація при завантаженні сторінки */
+@keyframes gentlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
 
-    /* Трохи підкорегуємо вирівнювання в шапці */
-    .header-left {
-        display: flex;
-        align-items: center;
+/* Обертання + підсвітка при наведенні */
+.mvs-logo:hover {
+    transform: rotate(360deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); /* Золотаве сяйво */
+    animation: none; /* Вимикаємо пульсацію при ховері */
+}
+
+/* Легкий пульсуючий ефект при завантаженні (одноразово) */
+header .mvs-logo {
+    animation: gentlePulse 2s ease-in-out 1;
+}
+
+/* Адаптація розміру на мобільних */
+@media (max-width: 576px) {
+    .mvs-logo {
+        height: 50px;
     }
+    .mvs-logo:hover {
+        transform: rotate(360deg) scale(1.15); /* Трохи сильніше на мобільному */
+    }
+}
+        
         
     </style>
 </head>
 <body>
     <!-- Шапка -->
-    <header>
+<!-- Шапка -->
+<header>
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <button class="toggle-sidebar-btn d-lg-none" id="toggleSidebarMobile">
                     <i class="bi bi-list"></i>
                 </button>
-                <!-- Замінено текст ТЦК на емблему МВС -->
+                <!-- Емблема МВС з анімацією -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/%D0%93%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%B4%D0%B8%D1%87%D0%BD%D0%B8%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA_-_%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_%D0%9C%D0%92%D0%A1_%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B8.svg/1200px-%D0%93%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%B4%D0%B8%D1%87%D0%BD%D0%B8%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA_-_%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0_%D0%9C%D0%92%D0%A1_%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B8.svg.png" 
                      alt="Емблема МВС України" 
-                     class="me-3" 
-                     style="height: 60px; width: auto;">
+                     class="mvs-logo me-3" 
+                     style="height: 60px; width: auto; transition: all 0.4s ease;">
                 <h1>Інформаційна система ТЦК та СП</h1>
                 <span class="demo-badge">ДЕМО-ВЕРСІЯ / MOCK DATA</span>
             </div>
@@ -1967,5 +1981,4 @@
     </script>
 </body>
 </html>
-
 
