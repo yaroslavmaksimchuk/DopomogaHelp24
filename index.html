@@ -1472,29 +1472,48 @@
         // MOCK-ДАНІ ДЛЯ ТЕСТУВАННЯ — РОЗШИРЕНО
         // ========================================
         // Mock-данні для облікових записів (додано більше для демонстрації)
-        const mockRecords = [
-            { id: 1, lastName: "Коваленко", firstName: "Олександр", middleName: "Васильович", dateOfBirth: "1985-05-15", rank: "Старший лейтенант", category: "officer", status: "active", notes: "Демо-запис 1", updatedAt: new Date().toISOString() },
-            { id: 2, lastName: "Шевченко", firstName: "Дмитро", middleName: "Іванович", dateOfBirth: "1990-02-20", rank: "Сержант", category: "sergeant", status: "reserve", notes: "Демо-запис 2", updatedAt: new Date().toISOString() },
-            { id: 3, lastName: "Бойко", firstName: "Сергій", middleName: "Петрович", dateOfBirth: "1978-11-10", rank: "Рядовий", category: "soldier", status: "discharged", notes: "Демо-запис 3", updatedAt: new Date().toISOString() },
-            { id: 4, lastName: "Ткаченко", firstName: "Андрій", middleName: "Миколайович", dateOfBirth: "1982-07-25", rank: "Капітан", category: "officer", status: "active", notes: "Демо-запис 4", updatedAt: new Date().toISOString() },
-            { id: 5, lastName: "Мельник", firstName: "Віктор", middleName: "Олеговий", dateOfBirth: "1995-03-30", rank: "Старшина", category: "sergeant", status: "active", notes: "Демо-запис 5", updatedAt: new Date().toISOString() },
-            { id: 6, lastName: "Іваненко", firstName: "Ольга", middleName: "Петрівна", dateOfBirth: "1992-08-12", rank: "Лейтенант", category: "officer", status: "reserve", notes: "Демо-запис 6", updatedAt: new Date().toISOString() },
-            { id: 7, lastName: "Сидорчук", firstName: "Іван", middleName: "Михайлович", dateOfBirth: "1988-04-05", rank: "Молодший сержант", category: "sergeant", status: "active", notes: "Демо-запис 7", updatedAt: new Date().toISOString() },
-            { id: 8, lastName: "Павленко", firstName: "Марія", middleName: "Олександрівна", dateOfBirth: "1998-01-22", rank: "Рядовий", category: "soldier", status: "discharged", notes: "Демо-запис 8", updatedAt: new Date().toISOString() },
-            { id: 9, lastName: "Кузьменко", firstName: "Сергій", middleName: "Вікторович", dateOfBirth: "1980-11-18", rank: "Майор", category: "officer", status: "active", notes: "Демо-запис 9", updatedAt: new Date().toISOString() },
-            { id: 10, lastName: "Гнатюк", firstName: "Анна", middleName: "Іванівна", dateOfBirth: "1993-06-09", rank: "Старший сержант", category: "sergeant", status: "reserve", notes: "Демо-запис 10", updatedAt: new Date().toISOString() },
-            { id: 11, lastName: "Бондаренко", firstName: "Петро", middleName: "Сергійович", dateOfBirth: "1975-09-30", rank: "Полковник", category: "officer", status: "discharged", notes: "Демо-запис 11", updatedAt: new Date().toISOString() },
-            { id: 12, lastName: "Мороз", firstName: "Оксана", middleName: "Дмитрівна", dateOfBirth: "1987-03-14", rank: "Прапорщик", category: "sergeant", status: "active", notes: "Демо-запис 12", updatedAt: new Date().toISOString() },
-            { id: 13, lastName: "Кравчук", firstName: "Василь", middleName: "Павлович", dateOfBirth: "1991-07-27", rank: "Єфрейтор", category: "soldier", status: "reserve", notes: "Демо-запис 13", updatedAt: new Date().toISOString() },
-            { id: 14, lastName: "Шевчук", firstName: "Тетяна", middleName: "Миколаївна", dateOfBirth: "1984-12-03", rank: "Підполковник", category: "officer", status: "active", notes: "Демо-запис 14", updatedAt: new Date().toISOString() },
-            { id: 15, lastName: "Левченко", firstName: "Юрій", middleName: "Олександрович", dateOfBirth: "1996-05-19", rank: "Старший прапорщик", category: "sergeant", status: "discharged", notes: "Демо-запис 15", updatedAt: new Date().toISOString() },
-            // Додано ще записів для розширення коду
-            { id: 16, lastName: "Захарченко", firstName: "Наталя", middleName: "Василівна", dateOfBirth: "1989-10-08", rank: "Капітан", category: "officer", status: "reserve", notes: "Демо-запис 16", updatedAt: new Date().toISOString() },
-            { id: 17, lastName: "Романенко", firstName: "Олег", middleName: "Ігорович", dateOfBirth: "1979-02-25", rank: "Сержант", category: "sergeant", status: "active", notes: "Демо-запис 17", updatedAt: new Date().toISOString() },
-            { id: 18, lastName: "Савченко", firstName: "Катерина", middleName: "Сергіївна", dateOfBirth: "1994-09-16", rank: "Рядовий", category: "soldier", status: "discharged", notes: "Демо-запис 18", updatedAt: new Date().toISOString() },
-            { id: 19, lastName: "Грищенко", firstName: "Максим", middleName: "Петрович", dateOfBirth: "1986-11-11", rank: "Лейтенант", category: "officer", status: "active", notes: "Демо-запис 19", updatedAt: new Date().toISOString() },
-            { id: 20, lastName: "Федоренко", firstName: "Ірина", middleName: "Олександрівна", dateOfBirth: "1997-04-28", rank: "Молодший сержант", category: "sergeant", status: "reserve", notes: "Демо-запис 20", updatedAt: new Date().toISOString() }
-        ];
+        // Генерація 13492 демо-записів (автоматично)
+const lastNames = ["Коваленко", "Шевченко", "Бойко", "Ткаченко", "Мельник", "Іваненко", "Сидорчук", "Павленко", "Кузьменко", "Гнатюк", "Бондаренко", "Мороз", "Кравчук", "Шевчук", "Левченко", "Захарченко", "Романенко", "Савченко", "Грищенко", "Федоренко", "Петренко", "Лисенко", "Даниленко", "Василенко", "Кравець"];
+const firstNamesMale = ["Олександр", "Дмитро", "Сергій", "Андрій", "Віктор", "Іван", "Олег", "Петро", "Максим", "Юрій", "Василь", "Михайло", "Роман", "Артем", "Микола"];
+const firstNamesFemale = ["Ольга", "Наталя", "Світлана", "Тетяна", "Оксана", "Ірина", "Ганна", "Марія", "Катерина", "Олена", "Людмила", "Вікторія", "Анна", "Юлія", "Аліна"];
+const middleNamesMale = ["Васильович", "Іванович", "Петрович", "Миколайович", "Олегович", "Сергійович", "Олександрович", "Дмитрович", "Володимирович", "Анатолійович"];
+const middleNamesFemale = ["Василівна", "Іванівна", "Петрівна", "Миколаївна", "Олегівна", "Сергіївна", "Олександрівна", "Дмитрівна", "Володимирівна", "Анатоліївна"];
+const ranks = ["Рядовий", "Єфрейтор", "Молодший сержант", "Сержант", "Старший сержант", "Старшина", "Прапорщик", "Старший прапорщик", "Лейтенант", "Старший лейтенант", "Капітан", "Майор", "Підполковник", "Полковник"];
+const categories = ["soldier", "sergeant", "officer"];
+const statuses = ["reserve", "wanted", "discharged", "deferment"];
+
+const mockRecords = [];
+
+for (let id = 1; id <= 13492; id++) {
+    const isFemale = Math.random() < 0.15; // ~15% жінок
+    const firstName = isFemale ? firstNamesFemale[Math.floor(Math.random() * firstNamesFemale.length)] : firstNamesMale[Math.floor(Math.random() * firstNamesMale.length)];
+    const middleName = isFemale ? middleNamesFemale[Math.floor(Math.random() * middleNamesFemale.length)] : middleNamesMale[Math.floor(Math.random() * middleNamesMale.length)];
+    
+    const year = 1955 + Math.floor(Math.random() * 50); // 1955–2005
+    const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+    const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+    const dateOfBirth = `${year}-${month}-${day}`;
+
+    const categoryIndex = Math.floor(Math.random() * categories.length);
+    const category = categories[categoryIndex];
+    let rank = ranks[Math.floor(Math.random() * ranks.length)];
+    if (category === "soldier") rank = ranks.slice(0, 2)[Math.floor(Math.random() * 2)];
+    else if (category === "sergeant") rank = ranks.slice(2, 8)[Math.floor(Math.random() * 6)];
+    else rank = ranks.slice(8)[Math.floor(Math.random() * ranks.slice(8).length)];
+
+    mockRecords.push({
+        id,
+        lastName: lastNames[Math.floor(Math.random() * lastNames.length)],
+        firstName,
+        middleName,
+        dateOfBirth,
+        rank,
+        category,
+        status: statuses[Math.floor(Math.random() * statuses.length)],
+        notes: "Демо-запис (автогенерація)",
+        updatedAt: new Date().toISOString()
+    });
+}
 
         // Mock-данні для користувачів (розширено)
         const mockUsers = [
@@ -2063,4 +2082,5 @@ document.getElementById('wantedCheckForm').addEventListener('submit', function(e
     </script>
 </body>
 </html>
+
 
